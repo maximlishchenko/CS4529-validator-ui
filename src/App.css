@@ -24,7 +24,14 @@
 
 .validation-table-row > td {
     text-align: center;
-    background-color: #f5f1f1;
+}
+
+.validation-table-row.violation-row {
+    background-color: #ffcccc;
+}
+  
+.validation-table-row.warning-row {
+    background-color: #ffffcc;
 }
 
 .validation-table-body tr {

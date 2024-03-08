@@ -22,10 +22,13 @@ const ValidationResultTable: React.FC<ValidationResultTableProps> = ({ response 
         </thead>
         <tbody className='validation-table-body'>
           {validationResults.map((result: any, index: number) => (
-            <tr className='validation-table-row' key={index}>
+            <tr
+              className={`validation-table-row ${result.resultSeverity === 'sh:Violation' ? 'violation-row' : result.resultSeverity === 'sh:Warning' ? 'warning-row' : ''}`}
+              key={index}
+            >
               <td>{result.focusNode}</td>
               <td>{result.resultMessage}</td>
-              <td>{result.resultSeverity}</td>
+              <td>{result.resultSeverity.substring(3)}</td>
               <td>{result.resultPath}</td>
             </tr>
           ))}
