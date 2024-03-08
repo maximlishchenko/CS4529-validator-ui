@@ -7,7 +7,7 @@ interface ButtonProps {
 
 const Button: React.FC<ButtonProps> = ({ onClick, children }) => {
   return (
-    <button onClick={onClick}>{children}</button>
+    <button className='validate-button' onClick={onClick}>{children}</button>
   );
 };
 

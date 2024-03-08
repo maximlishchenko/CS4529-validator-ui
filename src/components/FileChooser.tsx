@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 
 interface Props {
   endpoint: string;
+  onFileNameChange: (fileName: string | null) => void;
 }
 
-const FileChooser: React.FC<Props> = ({ endpoint }) => {
+const FileChooser: React.FC<Props> = ({ endpoint, onFileNameChange }) => {
   const [fileNames, setFileNames] = useState<string[]>([]);
   const [selectedFileName, setSelectedFileName] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -27,11 +28,8 @@ const FileChooser: React.FC<Props> = ({ endpoint }) => {
   const handleSelect = (fileName: string) => {
     setSelectedFileName(fileName);
     setIsDropdownOpen(false);
+    onFileNameChange(fileName);
   };
-
-//   const toggleDropdown = () => {
-//     setIsDropdownOpen(!isDropdownOpen);
-//   };
 
   return (
     <div className="file-chooser">
@@ -41,7 +39,6 @@ const FileChooser: React.FC<Props> = ({ endpoint }) => {
           value={selectedFileName || ''}
           placeholder="Choose a trace to validate"
           readOnly
-        //   onClick={toggleDropdown}
         />
         <button onClick={handleClick} disabled={isLoading}>
           {isLoading ? 'Loading...' : '▼'}

@@ -9,7 +9,7 @@ const ValidationResultTable: React.FC<ValidationResultTableProps> = ({ response 
   const validationResults = JSON.parse(response);
 
   return (
-    <table>
+    <table className='result-table'>
       <thead>
         <tr>
           <th>Focus Node</th>

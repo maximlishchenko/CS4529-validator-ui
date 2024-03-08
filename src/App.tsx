@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
-import InputField from './components/InputField.tsx';
+import './App.css';
 import Button from './components/Button.tsx';
 import ValidationResultTable from './components/ValidationResultTable.tsx';
+import FileChooser from './components/FileChooser.tsx';
 
 const App: React.FC = () => {
-  const [inputValue, setInputValue] = useState('');
+  const [selectedFileName, setSelectedFileName] = useState<string | null>(null);
   const [response, setResponse] = useState<string | null>(null);
   const [noViolationsMessage, setNoViolationsMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value);
-  };
+  const handleSelectedFileNameChange = (fileName: string | null) => {
+    setSelectedFileName(fileName);
+  }
+
 
   const handleButtonClick = async (endpoint: string) => {
     try {
@@ -21,7 +23,7 @@ const App: React.FC = () => {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*'
         },
-        body: inputValue
+        body: selectedFileName
       });
       const responseData = await response.json();
 
@@ -55,16 +57,18 @@ const App: React.FC = () => {
 
   return (
     <div>
-      <InputField value={inputValue} onChange={handleInputChange} />
-      <Button onClick={() => handleButtonClick('validate-cardinality')}>
-        Validate Cardinality
-      </Button>
-      <Button onClick={() => handleButtonClick('validate-type')}>
-        Validate Type
-      </Button>
-      <Button onClick={() => handleButtonClick('validate-sparql')}>
-        Validate SPARQL
-      </Button>
+      <div className='wrapper'>
+        <FileChooser endpoint='http://localhost:8080/get-file-names' onFileNameChange={handleSelectedFileNameChange} />
+        <Button onClick={() => handleButtonClick('validate-cardinality')}>
+          Validate Cardinality
+        </Button>
+        <Button onClick={() => handleButtonClick('validate-type')}>
+          Validate Type
+        </Button>
+        <Button onClick={() => handleButtonClick('validate-sparql')}>
+          Validate SPARQL
+        </Button>
+      </div>
       {errorMessage && <p>{errorMessage}</p>}
       {noViolationsMessage && <p>{noViolationsMessage}</p>}
       {response && <ValidationResultTable response={response} />}

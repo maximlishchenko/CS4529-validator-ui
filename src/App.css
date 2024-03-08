@@ -1,3 +1,39 @@
-.traceInput {
-    width: 200px;
+.wrapper {
+    display: flex;
+}
+
+.validate-button {
+    margin-left: 8px;
+}
+
+.result-table {
+    margin-top: 20px;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown > input {
+    width: 300px;
+}
+  
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.dropdown-item {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+    background-color: #f0f0f0;
 }
