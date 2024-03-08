@@ -8,6 +8,35 @@
 
 .result-table {
     margin-top: 20px;
+    width: 100%;
+}
+
+.validation-table-head-row {
+    background-color: #d0cece;
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.validation-table-head-row > th {
+    text-align: center;
+}
+
+.validation-table-row > td {
+    text-align: center;
+    background-color: #f5f1f1;
+}
+
+.validation-table-body tr {
+    border: 1px solid #ddd;
+}
+
+.validation-table-body td {
+    padding: 8px;
+  }
+
+.violations-message {
+    text-align: center;
 }
 
 .dropdown {

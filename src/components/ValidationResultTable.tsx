@@ -9,26 +9,29 @@ const ValidationResultTable: React.FC<ValidationResultTableProps> = ({ response 
   const validationResults = JSON.parse(response);
 
   return (
-    <table className='result-table'>
-      <thead>
-        <tr>
-          <th>Focus Node</th>
-          <th>Result Message</th>
-          <th>Result Severity</th>
-          <th>Result Path</th>
-        </tr>
-      </thead>
-      <tbody>
-        {validationResults.map((result: any, index: number) => (
-          <tr key={index}>
-            <td>{result.focusNode}</td>
-            <td>{result.resultMessage}</td>
-            <td>{result.resultSeverity}</td>
-            <td>{result.resultPath}</td>
+    <div>
+      <h2 className='violations-message'>The following violations were detected:</h2>
+      <table className='result-table'>
+        <thead>
+          <tr className='validation-table-head-row'>
+            <th>Focus Node</th>
+            <th>Result Message</th>
+            <th>Result Severity</th>
+            <th>Result Path</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody className='validation-table-body'>
+          {validationResults.map((result: any, index: number) => (
+            <tr className='validation-table-row' key={index}>
+              <td>{result.focusNode}</td>
+              <td>{result.resultMessage}</td>
+              <td>{result.resultSeverity}</td>
+              <td>{result.resultPath}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
 
