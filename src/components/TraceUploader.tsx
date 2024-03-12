@@ -48,10 +48,10 @@ const TraceUploader: React.FC<TraceUploaderProps> = ({ onTraceUpload }) => {
   };
 
   return (
-    <div>
-      <h3>Upload and Validate a trace (JSON-LD)</h3>
-      <input type="file" onChange={handleFileChange} />
-      <button onClick={handleUpload}>Upload and Validate</button>
+    <div className='trace-uploader'>
+      <h3>Upload and validate your trace (JSON-LD):</h3>
+      <input className='file-input-name' type="file" onChange={handleFileChange} />
+      <button className='upload-button' onClick={handleUpload}>Upload and Validate</button>
     </div>
   );
 };

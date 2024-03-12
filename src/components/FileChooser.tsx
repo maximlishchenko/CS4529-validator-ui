@@ -33,6 +33,7 @@ const FileChooser: React.FC<Props> = ({ endpoint, onFileNameChange }) => {
 
   return (
     <div className="file-chooser">
+      <h3>Validate an existing trace:</h3>
       <div className="dropdown">
         <input
           type="text"
