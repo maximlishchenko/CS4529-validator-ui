@@ -3,6 +3,7 @@ import './App.css';
 import Button from './components/Button.tsx';
 import ValidationResultTable from './components/ValidationResultTable.tsx';
 import FileChooser from './components/FileChooser.tsx';
+import TraceUploader from './components/TraceUploader.tsx';
 
 const App: React.FC = () => {
   const [selectedFileName, setSelectedFileName] = useState<string | null>(null);
@@ -13,6 +14,27 @@ const App: React.FC = () => {
   const handleSelectedFileNameChange = (fileName: string | null) => {
     setSelectedFileName(fileName);
   }
+
+  const handleTraceUpload = (response: string | null) => {
+    if (response === 'No constraints were violated.') {
+      setResponse(null);
+      setNoViolationsMessage(response);
+      setErrorMessage(null);
+    } else if (response === 'Uploaded file is empty.') {
+      setResponse(null);
+      setNoViolationsMessage(null);
+      setErrorMessage(response);
+    } else if (response === 'An unexpected error occurred.') {
+      setResponse(null);
+      setNoViolationsMessage(null);
+      setErrorMessage(response);
+    } else {
+      setResponse(response);
+      setNoViolationsMessage(null);
+      setErrorMessage(null);
+    }
+  }
+
 
 
   const handleButtonClick = async (endpoint: string) => {
@@ -68,9 +90,10 @@ const App: React.FC = () => {
         <Button onClick={() => handleButtonClick('validate-sparql')}>
           Validate SPARQL
         </Button>
+        <TraceUploader onTraceUpload={handleTraceUpload} />
       </div>
-      {errorMessage && <p>{errorMessage}</p>}
-      {noViolationsMessage && <p>{noViolationsMessage}</p>}
+      {errorMessage && <h2 className='violations-message'>{errorMessage}</h2>}
+      {noViolationsMessage && <h2 className='violations-message'>{noViolationsMessage}</h2>}
       {response && <ValidationResultTable response={response} />}
     </div>
   );

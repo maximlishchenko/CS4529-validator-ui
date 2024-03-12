@@ -5,7 +5,6 @@ interface ValidationResultTableProps {
 }
 
 const ValidationResultTable: React.FC<ValidationResultTableProps> = ({ response }) => {
-    console.log(response);
   const validationResults = JSON.parse(response);
 
   return (
