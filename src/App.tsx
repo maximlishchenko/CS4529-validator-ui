@@ -12,7 +12,7 @@ const App: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleSelectedFileNameChange = (fileName: string | null) => {
-    setSelectedFileName(fileName);
+    setSelectedFileName(fileName)
   }
 
   const handleTraceUpload = (response: string | null) => {
@@ -20,7 +20,15 @@ const App: React.FC = () => {
       setResponse(null);
       setNoViolationsMessage(response);
       setErrorMessage(null);
-    } else if (response === 'Uploaded file is empty.') {
+    } else if (response === 'Uploaded file is empty, try again.') {
+      setResponse(null);
+      setNoViolationsMessage(null);
+      setErrorMessage(response);
+    } else if (response === 'Only JSON files are accepted, try again.') {
+      setResponse(null);
+      setNoViolationsMessage(null);
+      setErrorMessage(response);
+    } else if (response === 'Error parsing the file, try again.') {
       setResponse(null);
       setNoViolationsMessage(null);
       setErrorMessage(response);

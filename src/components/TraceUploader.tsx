@@ -38,7 +38,13 @@ const TraceUploader: React.FC<TraceUploaderProps> = ({ onTraceUpload }) => {
         onTraceUpload('No constraints were violated.');
       } else if (responseData.message === 'Uploaded file is empty') {
         // Case 3: Uploaded file is empty
-        onTraceUpload('Uploaded file is empty.');
+        onTraceUpload('Uploaded file is empty, try again.');
+      } else if (responseData.message === 'Only .json files are accepted') {
+        // Case 4: Wrong file format
+        onTraceUpload('Only JSON files are accepted, try again.')
+      } else if (responseData.message === 'Error parsing the file') {
+        // Case 5: Syntax errors present
+        onTraceUpload('Error parsing the file, try again.')
       } else {
         onTraceUpload('An unexpected error occurred.');
       }
