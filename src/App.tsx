@@ -6,15 +6,23 @@ import FileChooser from './components/FileChooser.tsx';
 import TraceUploader from './components/TraceUploader.tsx';
 
 const App: React.FC = () => {
+  // create needed states and modifiers for them
+
+  // currently targeted file name that is to be validated, initially null
   const [selectedFileName, setSelectedFileName] = useState<string | null>(null);
+  // response from server containing validation result, initially null
   const [response, setResponse] = useState<string | null>(null);
+  // string representing message that no violations occurred
   const [noViolationsMessage, setNoViolationsMessage] = useState<string | null>(null);
+  // string representing the error message (different)
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+  // function to be given as callback to file chooser component
   const handleSelectedFileNameChange = (fileName: string | null) => {
     setSelectedFileName(fileName)
   }
 
+  // function to handle state logic regarding the response from server
   const handleTraceUpload = (response: string | null) => {
     if (response === 'No constraints were violated.') {
       setResponse(null);
@@ -44,9 +52,13 @@ const App: React.FC = () => {
   }
 
 
-
+  // function to handle validation button click
   const handleButtonClick = async (endpoint: string) => {
     try {
+      // endpoint represent the endpoint name
+      // cardinality, type, or sparql
+
+      // trigger endpoint
       const response = await fetch(`http://localhost:8080/${endpoint}`, {
         method: 'POST',
         headers: {
@@ -55,20 +67,22 @@ const App: React.FC = () => {
         },
         body: selectedFileName
       });
+      // convert response to json
       const responseData = await response.json();
 
+      // handle state logic according to response
       if (Array.isArray(responseData) && responseData.length > 0) {
-        // Case 1: array of validation results
+        // case 1: array of validation results
         setResponse(JSON.stringify(responseData));
         setNoViolationsMessage(null);
         setErrorMessage(null);
       } else if (Array.isArray(responseData) && responseData.length === 0) {
-        // Case 2: empty array
+        // case 2: empty array
         setNoViolationsMessage('No constraints were violated.');
         setErrorMessage(null);
         setResponse(null);
       } else if (responseData.message === 'File not found') {
-        // Case 3: file not found
+        // case 3: file not found
         setErrorMessage('File with such name not found.');
         setResponse(null);
         setNoViolationsMessage(null);
@@ -85,6 +99,8 @@ const App: React.FC = () => {
     }
   };
 
+  // build the main application using components, attaching needed functionality
+  // to the html elements
   return (
     <div>
       <div className='wrapper'>

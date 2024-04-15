@@ -4,9 +4,14 @@ interface ValidationResultTableProps {
   response: string;
 }
 
+// expect response from server as string
 const ValidationResultTable: React.FC<ValidationResultTableProps> = ({ response }) => {
+
+  // ensure correct json format
   const validationResults = JSON.parse(response);
 
+  // build HTML table mapping each of the validation results into rows
+  // and each of the fields into appropriate columns
   return (
     <div>
       <h2 className='violations-message'>The following violations were detected:</h2>
@@ -37,4 +42,5 @@ const ValidationResultTable: React.FC<ValidationResultTableProps> = ({ response 
   );
 };
 
+// export component so it's accessible in App.tsx
 export default ValidationResultTable;

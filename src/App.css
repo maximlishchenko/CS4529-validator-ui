@@ -10,12 +10,12 @@
 
 .trace-uploader {
     margin-left: 40px;
-    border-left: 3px black solid;
+    border-left: 4px black solid;
     padding-left: 35px;
 }
 
 .upload-button {
-    margin-left: 100px;
+    margin-left: 50px;
 }
 
 .file-input-name {
